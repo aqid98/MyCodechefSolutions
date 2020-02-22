@@ -1,0 +1,45 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+ifstream f("input.in");
+//ofstream g("data.out");
+int main()
+{
+    int t,r,c,flag=0;
+    int a[100][100],adj[100][100];
+    f>>t;
+    while(t--)
+    {
+    f>>r>>c;
+    for(int i=1;i<=r;i++)
+        {
+            for(int j=1;j<=c;j++)
+            {
+            f>>a[i][j];
+            }
+        }
+    adj[r][1]=adj[1][c]=adj[r][c]=adj[1][1]=2;
+    for(int i=2;i<=r-1;i++)
+        for(int j=2;j<=c-1;j++)
+        {
+        adj[i][j]=4;
+        }
+    for(int k=2;k<c;k++)
+    {
+        adj[1][k]=adj[r][k]=3;
+    }
+    for(int k=2;k<r;k++)
+    {
+        adj[k][1]=adj[k][c]=3;
+    }
+    for(int i=1;i<=r;i++)
+       for(int j=1;j<=c;j++)
+            if(adj[i][j]<=a[i][j])
+                    flag=1;
+       if(flag==0)
+       cout<<"Stable"<<endl;
+       else cout<<"Unstable"<<endl;
+       flag=0;
+       }
+    return 0;
+}
